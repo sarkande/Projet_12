@@ -7,7 +7,7 @@ import {
 const axios = require("axios");
 
 const data_request_mock = true;
-const url_datas = "http://localhost:3000/datas";
+const url_datas = "http://localhost:3000/user";
 
 class API {
    static getUser(id) {
@@ -21,7 +21,9 @@ class API {
             }
          });
       } else {
-         return axios.get(url_datas + "/" + id);
+         return axios
+            .get(url_datas + "/" + id)
+            .then((response) => response.data.data);
       }
    }
 
@@ -36,7 +38,9 @@ class API {
             }
          });
       } else {
-         return axios.get(url_datas + "/" + id + "/activity");
+         return axios
+            .get(url_datas + "/" + id + "/activity")
+            .then((response) => response.data.data);
       }
    }
 
@@ -53,7 +57,9 @@ class API {
             }
          });
       } else {
-         return axios.get(url_datas + "/" + id + "/average-sessions");
+         return axios
+            .get(url_datas + "/" + id + "/average-sessions")
+            .then((response) => response.data.data);
       }
    }
 
@@ -68,7 +74,9 @@ class API {
             }
          });
       } else {
-         return axios.get(url_datas + "/" + id + "/performance");
+         return axios
+            .get(url_datas + "/" + id + "/performance")
+            .then((response) => response.data.data);
       }
    }
 }
