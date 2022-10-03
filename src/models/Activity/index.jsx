@@ -7,7 +7,6 @@ class Activity {
       API.getUserActivity(this.userId)
          .then((user) => {
             this.sessions = user.sessions;
-            console.log(this);
          })
          .catch((error) => {
             console.log(error);

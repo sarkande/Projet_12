@@ -4,6 +4,7 @@ import {
    USER_AVERAGE_SESSIONS,
    USER_PERFORMANCE,
 } from "../../assets/mockedData";
+
 const axios = require("axios");
 
 const data_request_mock = true;

@@ -9,7 +9,6 @@ class User {
             this.userInfos = user.userInfos;
             this.todayScore = user.todayScore;
             this.keyData = user.keyData;
-            console.log(this);
          })
          .catch((error) => {
             console.log(error);

@@ -4,11 +4,10 @@ class Performance {
    constructor(id) {
       this.userId = id;
 
-      API.getUserPerformance(this._iuserIdd)
+      API.getUserPerformance(this.userId)
          .then((user) => {
             this.kind = user.kind;
             this.data = user.data;
-            console.log(this);
          })
          .catch((error) => {
             console.log(error);
