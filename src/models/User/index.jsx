@@ -2,9 +2,9 @@ import API from "../../services/API";
 
 class User {
    constructor(id) {
-      this._id = id;
+      this.id = id;
 
-      API.getUser(this._id)
+      API.getUser(this.id)
          .then((user) => {
             this.userInfos = user.userInfos;
             this.todayScore = user.todayScore;
