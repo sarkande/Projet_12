@@ -5,7 +5,7 @@ import Performance from "../models/Performance/index.jsx";
 
 import * as d3 from "d3";
 
-function App() {
+function Test() {
    const user = new User(12);
    console.log(user);
 
@@ -29,4 +29,4 @@ function App() {
    );
 }
 
-export default App;
+export default Test;

@@ -1,0 +1,42 @@
+.NavBarMenu {
+   border: solid 1px #000;
+   background-color: #000;
+
+   color: white;
+   height: 80px;
+   &__container {
+      display: flex;
+      top: 10px;
+      position: relative;
+
+      &__logo {
+         width: 250px;
+         margin-left: 29px;
+         &--img {
+            width: 200px;
+         }
+      }
+
+      &__items {
+         display: flex;
+         align-content: center;
+         align-items: center;
+         justify-content: space-around;
+         flex-wrap: nowrap;
+         flex-direction: row;
+         flex: 1;
+         &--item {
+            & a,
+            & a:visited {
+               color: white;
+               text-decoration: none;
+
+               font-family: "Roboto", sans-serif;
+               font-size: 24px;
+               font-weight: 500;
+               line-height: 24px;
+            }
+         }
+      }
+   }
+}

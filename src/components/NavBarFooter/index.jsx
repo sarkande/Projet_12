@@ -5,26 +5,28 @@ import icon_4 from "../../assets/icons/icon_4.png";
 
 function NavBarFooter() {
    return (
-      <div className="navBarFooter">
-         <div className="navBarFooter__container">
-            <div className="navBarFooter__container__items">
-               <div className="navBarFooter__container__items__item">
+      <div className="NavBarFooter">
+         <div className="NavBarFooter__container">
+            <div className="NavBarFooter__container__items">
+               <div className="NavBarFooter__container__items--item">
                   <img src={icon_1} alt="icon_1" />
                </div>
-               <div className="navBarFooter__container__items__item">
+               <div className="NavBarFooter__container__items--item">
                   <img src={icon_2} alt="icon_2" />
                </div>
-               <div className="navBarFooter__container__items__item">
+               <div className="NavBarFooter__container__items--item">
                   <img src={icon_3} alt="icon_2" />
                </div>
-               <div className="navBarFooter__container__items__item">
+               <div className="NavBarFooter__container__items--item">
                   <img src={icon_4} alt="icon_2" />
                </div>
             </div>
-            <div className="navBarFooter__container__copyright">
+            <div className="NavBarFooter__container__copyright">
                <p>Copyright, SportSee 2022</p>
             </div>
          </div>
       </div>
    );
 }
+
+export default NavBarFooter;
