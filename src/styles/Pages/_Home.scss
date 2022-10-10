@@ -1,4 +1,19 @@
 .home {
-   margin-left: 117px;
+   position: relative;
+
    padding: 10px;
+   left: 117px;
+   margin-left: 109px;
+   margin-right: 117px;
+   font-family: "Roboto", sans-serif;
+
+   h1 {
+      font-size: 48px;
+   }
+   p {
+      font-size: 24px;
+   }
+   &__title--user {
+      color: red;
+   }
 }

@@ -2,19 +2,26 @@ body {
   margin: 0px;
 }
 
+#root {
+  min-width: 1024px;
+  min-height: 780px;
+}
+
+/*
+1024x780
+*/
 .NavBarFooter {
   background-color: #000;
   color: white;
   width: 117px;
   height: calc(100% - 82px);
-  position: absolute;
+  position: fixed;
 }
-
 .NavBarFooter__container {
   margin-top: 100px;
   background-color: #000;
+  height: 100%;
 }
-
 .NavBarFooter__container__items--item {
   border-radius: 6px;
   background-color: white;
@@ -23,7 +30,6 @@ body {
   margin: auto;
   margin-bottom: 20px;
 }
-
 .NavBarFooter__container__items--item img {
   margin-left: auto;
   margin-right: auto;
@@ -31,19 +37,22 @@ body {
   top: 16px;
   position: relative;
 }
-
 .NavBarFooter__container__copyright {
   rotate: 180deg;
   margin-bottom: 50px;
-  margin-top: 50px;
+  padding-top: 50px;
+  top: 50px;
+  position: relative;
+  background-color: #000;
 }
-
 .NavBarFooter__container__copyright p {
-  -webkit-writing-mode: vertical-rl;
-      -ms-writing-mode: tb-rl;
-          writing-mode: vertical-rl;
+  -ms-writing-mode: tb-rl;
+      writing-mode: vertical-rl;
   text-orientation: mixed;
-  margin: auto;
+  font-family: "Roboto", sans-serif;
+  font-size: 12px;
+  left: 37.5px;
+  position: relative;
 }
 
 .NavBarMenu {
@@ -52,48 +61,28 @@ body {
   color: white;
   height: 80px;
 }
-
 .NavBarMenu__container {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   top: 10px;
   position: relative;
 }
-
 .NavBarMenu__container__logo {
   width: 250px;
   margin-left: 29px;
 }
-
 .NavBarMenu__container__logo--img {
   width: 200px;
 }
-
 .NavBarMenu__container__items {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-line-pack: center;
-      align-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
-  -ms-flex-wrap: nowrap;
-      flex-wrap: nowrap;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
+  align-content: center;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  flex: 1;
 }
-
-.NavBarMenu__container__items--item a,
-.NavBarMenu__container__items--item a:visited {
+.NavBarMenu__container__items--item a, .NavBarMenu__container__items--item a:visited {
   color: white;
   text-decoration: none;
   font-family: "Roboto", sans-serif;
@@ -103,7 +92,19 @@ body {
 }
 
 .home {
-  margin-left: 117px;
+  position: relative;
   padding: 10px;
+  left: 117px;
+  margin-left: 109px;
+  margin-right: 117px;
+  font-family: "Roboto", sans-serif;
 }
-/*# sourceMappingURL=index.css.map */
+.home h1 {
+  font-size: 48px;
+}
+.home p {
+  font-size: 24px;
+}
+.home__title--user {
+  color: red;
+}/*# sourceMappingURL=index.css.map */
