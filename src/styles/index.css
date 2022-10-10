@@ -18,7 +18,7 @@ body {
   position: fixed;
 }
 .NavBarFooter__container {
-  margin-top: 100px;
+  margin-top: 270px;
   background-color: #000;
   height: 100%;
 }
@@ -60,6 +60,9 @@ body {
   background-color: #000;
   color: white;
   height: 80px;
+  position: fixed;
+  width: 100%;
+  z-index: 2;
 }
 .NavBarMenu__container {
   display: flex;
@@ -95,6 +98,7 @@ body {
   position: relative;
   padding: 10px;
   left: 117px;
+  top: 80px;
   margin-left: 109px;
   margin-right: 117px;
   font-family: "Roboto", sans-serif;
@@ -107,4 +111,32 @@ body {
 }
 .home__title--user {
   color: red;
+}
+.home__stats {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  align-items: center;
+  width: 872px;
+}
+.home__stats--card {
+  border: solid 1px black;
+  height: 263px;
+  width: 258px;
+  border-radius: 5px;
+  margin: 15px;
+}
+.home__stats--card.large {
+  height: 320px;
+  width: 840px;
+}
+.home__stats--card.red-card {
+  background-color: red;
+  color: white;
+}
+.home__stats--card.black-card {
+  background-color: #282d30;
+  color: white;
 }/*# sourceMappingURL=index.css.map */

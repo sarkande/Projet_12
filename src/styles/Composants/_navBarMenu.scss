@@ -4,6 +4,11 @@
 
    color: white;
    height: 80px;
+
+   position: fixed;
+   width: 100%;
+   z-index: 2;
+
    &__container {
       display: flex;
       top: 10px;

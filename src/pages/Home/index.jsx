@@ -8,8 +8,8 @@ function Home() {
 
          <div className="home__stats">
             <div className="home__stats--card large"></div>
-            <div className="home__stats--card"></div>
-            <div className="home__stats--card"></div>
+            <div className="home__stats--card red-card"></div>
+            <div className="home__stats--card black-card"></div>
             <div className="home__stats--card"></div>
          </div>
       </div>
