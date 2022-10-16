@@ -1,5 +1,7 @@
 function GraphAverageSessions(data) {
+   console.log("GraphAverageSessions", data);
    console.log(data);
+
    return (
       <div className="home__stats--card red-card">
          <div className="graph-average-sessions">

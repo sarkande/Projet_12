@@ -1,5 +1,5 @@
 function GraphActivity(data) {
-   console.log(data);
+   console.log("GraphActivity", data);
    return (
       <div className="home__stats--card large">
          <div className="graph-activity">

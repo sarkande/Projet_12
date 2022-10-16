@@ -1,5 +1,5 @@
 function GraphPerformance(data) {
-   console.log(data);
+   console.log("GraphPerformance", data);
    return (
       <div className="home__stats--card black-card">
          <div className="graph-performance">
