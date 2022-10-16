@@ -7,6 +7,8 @@ class User {
       this.todayScore = null;
       this.keyData = null;
       this.isLoaded = false;
+
+      this.error = false;
    }
 
    async load() {
@@ -16,15 +18,11 @@ class User {
             this.todayScore = user.todayScore;
             this.keyData = user.keyData;
             this.isLoaded = true;
-
-            console.log("user", this);
          })
          .catch((error) => {
             console.log(error);
+            this.error = true;
          });
-   }
-   getUserInfos() {
-      return this;
    }
 }
 
