@@ -13,4 +13,14 @@
       stroke-width: 2px;
       stroke-linecap: round;
    }
+   text {
+      fill: white;
+      font-size: 15px;
+   }
+   circle {
+      opacity: 0;
+      &:hover {
+         opacity: 1;
+      }
+   }
 }

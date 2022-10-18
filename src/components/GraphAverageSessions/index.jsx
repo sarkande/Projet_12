@@ -1,4 +1,5 @@
 import * as d3 from "d3";
+import { selectAll } from "d3";
 import { useEffect } from "react";
 
 //https://observablehq.com/@d3/d3-line
@@ -25,7 +26,7 @@ function GraphAverageSessions(data) {
       const width = 258;
       const height = 263;
 
-      const margin = { top: 0, right: 0, bottom: 50, left: 0 };
+      const margin = { top: 50, right: 20, bottom: 50, left: 20 };
 
       const innerWidth = width - margin.left - margin.right;
       const innerHeight = height - margin.top - margin.bottom;
@@ -41,7 +42,7 @@ function GraphAverageSessions(data) {
 
       const scaleX = d3.scaleLinear().domain([1, 7]).range([0, innerWidth]);
 
-      const scaleY = d3.scaleLinear().domain([0, 100]).range([innerHeight, 0]);
+      const scaleY = d3.scaleLinear().domain([0, 80]).range([innerHeight, 0]);
 
       const line = d3
          .line()
@@ -52,49 +53,71 @@ function GraphAverageSessions(data) {
       g.append("path")
          .attr("d", line(lineDataAnimation))
          .transition()
-         .duration(1000)
+         .duration(2000)
          .attr("d", line(lineData));
-      // .attrTween("d", function () {
-      //    return d3.interpolatePath(
-      //       line([lineData[0], lineData[6]]),
-      //       line(lineData)
-      //    );
-      // });
 
-      // g.append("path").attr("d", line([lineData[0], lineData[6]]));
+      const axisX = d3.axisBottom(scaleX).ticks(7);
 
-      // const walkX = d3.scaleLinear().range([0, 300]).domain([0, 7]);
+      const axisXSelector = svg
+         .append("g")
+         .call(axisX)
+         .attr(
+            "transform",
+            `translate(${margin.left},${
+               innerHeight + margin.bottom + margin.bottom / 3
+            })`
+         );
 
-      // const walkY = d3
-      //    .scaleLinear()
-      //    .range([170, 0])
-      //    .domain([0, Math.max(...lineData.map((d) => d[1])) + 10]);
+      axisXSelector.selectAll(".tick text").each(function (d, i) {
+         switch (d) {
+            case 1:
+               d3.select(this).text("L");
+               break;
+            case 2:
+               d3.select(this).text("M");
+               break;
+            case 3:
+               d3.select(this).text("M");
+               break;
+            case 4:
+               d3.select(this).text("J");
+               break;
+            case 5:
+               d3.select(this).text("V");
+               break;
+            case 6:
+               d3.select(this).text("S");
+               break;
+            case 7:
+               d3.select(this).text("D");
+               break;
+            default:
+               break;
+         }
+      });
 
-      // let line = d3
-      //    .line()
-      //    .x((d) => walkX(d[0]))
-      //    .y((d) => walkY(d[1]))
-      //    .curve(d3.curveMonotoneX);
+      axisXSelector.select(".domain").remove();
+      axisXSelector.selectAll(".tick line").remove();
 
-      // let svg = d3
-      //    .select(".graph")
-      //    // .attr(
-      //    //    "viewBox",
-      //    //    "0 0 " + Math.min(width, height) + " " + Math.min(width, height)
-      //    // )
-      //    .attr("preserveAspectRatio", "xMinYMin")
-      //    .append("g");
+      const title = svg.append("g");
+      title
+         .append("text")
+         .text("Durée moyenne des")
+         .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
-      // svg.append("path").attr("d", line(lineData));
+      title
+         .append("text")
+         .text("sessions")
+         .attr("transform", `translate(${margin.left}, ${margin.top + 25})`);
 
-      // svg.selectAll("circle")
-      //    .data(lineData)
-      //    .enter()
-      //    .append("circle")
-      //    .attr("cx", (d) => walkX(d[0]))
-      //    .attr("cy", (d) => walkY(d[1]))
-      //    .attr("r", 5)
-      //    .attr("fill", "white");
+      g.selectAll("circle")
+         .data(lineData)
+         .enter()
+         .append("circle")
+         .attr("cx", (d) => scaleX(d[0]))
+         .attr("cy", (d) => scaleY(d[1]))
+         .attr("r", 5)
+         .attr("fill", "white");
    }, [dataGraph]);
    return (
       <div className="home__stats--card red-card">
