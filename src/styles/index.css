@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap");
 body {
   margin: 0px;
 }
@@ -94,14 +95,36 @@ body {
   line-height: 24px;
 }
 
-.graph {
-  width: 258px;
-  height: 263px;
-}
 .graph path {
   stroke: white;
   stroke-width: 2px;
   fill: none;
+}
+.graph circle {
+  opacity: 0;
+}
+.graph circle:hover {
+  opacity: 1;
+}
+.graph g {
+  transform: translateX(-21px);
+}
+
+.graph-average-sessions {
+  font-family: "Lato", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 24px;
+}
+.graph-average-sessions svg,
+.graph-average-sessions g {
+  fill: none;
+}
+.graph-average-sessions path {
+  stroke: white;
+  stroke-width: 2px;
+  stroke-linecap: round;
 }
 
 .home {
@@ -132,7 +155,6 @@ body {
   width: 872px;
 }
 .home__stats--card {
-  border: solid 1px black;
   height: 263px;
   width: 258px;
   border-radius: 5px;
@@ -141,6 +163,7 @@ body {
 .home__stats--card.large {
   height: 320px;
   width: 840px;
+  background-color: gray;
 }
 .home__stats--card.red-card {
   background-color: red;

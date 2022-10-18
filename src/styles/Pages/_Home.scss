@@ -28,7 +28,6 @@
       align-items: center;
       width: 872px;
       &--card {
-         border: solid 1px black;
          height: 263px;
          width: 258px;
 
@@ -38,6 +37,7 @@
          &.large {
             height: 320px;
             width: 840px;
+            background-color: gray;
          }
          &.red-card {
             background-color: red;

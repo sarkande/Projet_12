@@ -1,0 +1,16 @@
+.graph-average-sessions {
+   font-family: "Lato", sans-serif;
+   font-style: normal;
+   font-weight: 500;
+   font-size: 15px;
+   line-height: 24px;
+   svg,
+   g {
+      fill: none;
+   }
+   path {
+      stroke: white;
+      stroke-width: 2px;
+      stroke-linecap: round;
+   }
+}

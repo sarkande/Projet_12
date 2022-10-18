@@ -1,8 +1,10 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap");
+
 @import "./Base/Base";
 
 @import "./Composants/navBarFooter";
 @import "./Composants/navBarMenu";
 @import "./Composants/graph";
-
+@import "./Composants/graphAverageSessions";
 @import "./Pages/Home";
 @import "./Pages/Test";
