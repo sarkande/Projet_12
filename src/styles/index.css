@@ -142,6 +142,7 @@ body {
 }
 .graph-average-sessions .hover-selector {
   opacity: 0;
+  fill: black;
 }
 .graph-average-sessions .tooltip-rect {
   fill: white;

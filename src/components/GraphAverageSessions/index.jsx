@@ -1,5 +1,4 @@
 import * as d3 from "d3";
-import { selectAll } from "d3";
 import { useEffect } from "react";
 
 //https://observablehq.com/@d3/d3-line
@@ -35,6 +34,7 @@ function GraphAverageSessions(data) {
       const innerWidth = width - margin.left - margin.right;
       const innerHeight = height - margin.top - margin.bottom;
 
+      const durationTransitionLine = 2000;
       //set the size of the svg
       const svg = d3
          .select(".graph-average-sessions")
@@ -61,7 +61,7 @@ function GraphAverageSessions(data) {
       g.append("path")
          .attr("d", line(lineDataAnimation))
          .transition()
-         .duration(2000)
+         .duration(durationTransitionLine)
          .attr("d", line(lineData));
 
       //set the x axis
@@ -132,7 +132,10 @@ function GraphAverageSessions(data) {
          .attr("cx", (d) => scaleX(d[0]))
          .attr("cy", (d) => scaleY(d[1]))
          .attr("r", 5)
-         .attr("fill", "white");
+         .attr("fill", "white")
+         .transition()
+         .duration(durationTransitionLine)
+         .delay(durationTransitionLine);
 
       //set the groupe rect
       const widthHoverSelector =
@@ -148,8 +151,7 @@ function GraphAverageSessions(data) {
             .attr("y", 0)
             .attr("width", widthHoverSelector * (7 - i))
             .attr("height", height)
-            .attr("fill", "black")
-            .attr("opacity", 0)
+
             .on("mouseenter", function (event, d) {
                console.log(event.target);
                d3.select(circles.nodes()[i])
@@ -186,6 +188,7 @@ function GraphAverageSessions(data) {
                   .transition()
                   .duration(100)
                   .style("opacity", "0"); // <== CSS selector (DOM)
+
                d3.select(this).transition().duration(100).style("opacity", "0"); // <== CSS selector (DOM)
 
                //remove tooltip
