@@ -129,12 +129,27 @@ body {
 .graph-average-sessions text {
   fill: white;
   font-size: 15px;
+  z-index: 2;
+}
+.graph-average-sessions text:hover {
+  opacity: 1;
 }
 .graph-average-sessions circle {
   opacity: 0;
 }
-.graph-average-sessions circle:hover {
+.graph-average-sessions rect {
   opacity: 1;
+}
+.graph-average-sessions .hover-selector {
+  opacity: 0;
+}
+.graph-average-sessions .tooltip-rect {
+  fill: white;
+}
+.graph-average-sessions .tooltip-text {
+  font-size: 8px;
+  fill: black;
+  font-weight: 700;
 }
 
 .home {

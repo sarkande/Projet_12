@@ -16,11 +16,29 @@
    text {
       fill: white;
       font-size: 15px;
+      z-index: 2;
+      &:hover {
+         opacity: 1;
+      }
    }
    circle {
       opacity: 0;
-      &:hover {
-         opacity: 1;
+   }
+   rect {
+      opacity: 1;
+      //z-index: 2;
+   }
+   .hover-selector {
+      opacity: 0;
+   }
+   .tooltip {
+      &-rect {
+         fill: white;
+      }
+      &-text {
+         font-size: 8px;
+         fill: black;
+         font-weight: 700;
       }
    }
 }

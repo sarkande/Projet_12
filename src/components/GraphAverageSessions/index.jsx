@@ -5,59 +5,69 @@ import { useEffect } from "react";
 //https://observablehq.com/@d3/d3-line
 
 function GraphAverageSessions(data) {
+   //load data from props
    console.log("GraphAverageSessions", data);
-   console.log(data);
    let dataGraph = data.data;
 
    useEffect(() => {
+      //array of data to graph
       const lineData = [];
 
+      //extract data
       dataGraph.forEach((element, index) => {
          lineData.push([element.day, element.sessionLength]);
       });
 
+      //interpolate data to make a smooth graph animation
       const lineDataAnimation = interpolateArray(
          [lineData[0][1], lineData[6][1]],
          lineData.length
       );
-      //https://www.tutorialsteacher.com/d3js/axes-in-d3
+
+      //set the dimensions and margins of the graph
       console.log("lineData", lineData);
       console.log("lineDataAnimation", lineDataAnimation);
       const width = 258;
       const height = 263;
-
       const margin = { top: 50, right: 20, bottom: 50, left: 20 };
 
+      //set the inner dimensions of the graph (without margins)
       const innerWidth = width - margin.left - margin.right;
       const innerHeight = height - margin.top - margin.bottom;
 
+      //set the size of the svg
       const svg = d3
          .select(".graph-average-sessions")
          .attr("width", width)
          .attr("height", height);
 
+      //first group to stock the graph
       const g = svg
          .append("g")
          .attr("transform", `translate(${margin.left},${margin.top})`);
 
+      //domains and ranges
       const scaleX = d3.scaleLinear().domain([1, 7]).range([0, innerWidth]);
-
       const scaleY = d3.scaleLinear().domain([0, 80]).range([innerHeight, 0]);
 
+      //line
       const line = d3
          .line()
          .x((d) => scaleX(d[0]))
          .y((d) => scaleY(d[1]))
          .curve(d3.curveMonotoneX);
 
+      //append the line
       g.append("path")
          .attr("d", line(lineDataAnimation))
          .transition()
          .duration(2000)
          .attr("d", line(lineData));
 
+      //set the x axis
       const axisX = d3.axisBottom(scaleX).ticks(7);
 
+      //append the x axis
       const axisXSelector = svg
          .append("g")
          .call(axisX)
@@ -68,6 +78,7 @@ function GraphAverageSessions(data) {
             })`
          );
 
+      //transform the x axis text to days
       axisXSelector.selectAll(".tick text").each(function (d, i) {
          switch (d) {
             case 1:
@@ -96,9 +107,11 @@ function GraphAverageSessions(data) {
          }
       });
 
+      //remove unpleasant ticks
       axisXSelector.select(".domain").remove();
       axisXSelector.selectAll(".tick line").remove();
 
+      //append title
       const title = svg.append("g");
       title
          .append("text")
@@ -110,7 +123,9 @@ function GraphAverageSessions(data) {
          .text("sessions")
          .attr("transform", `translate(${margin.left}, ${margin.top + 25})`);
 
-      g.selectAll("circle")
+      //Append dots to the line
+      const circles = g
+         .selectAll("circle")
          .data(lineData)
          .enter()
          .append("circle")
@@ -118,25 +133,69 @@ function GraphAverageSessions(data) {
          .attr("cy", (d) => scaleY(d[1]))
          .attr("r", 5)
          .attr("fill", "white");
+
+      //set the groupe rect
+      const widthHoverSelector =
+         parseInt(scaleX.range()[1] / scaleX.domain()[1]) + 6;
+      const groupHoverSelector = svg.append("g");
+      const tooltip = groupHoverSelector.append("g");
+      for (let i = 0; i < scaleX.domain()[1]; i++) {
+         groupHoverSelector
+            .append("rect")
+            .classed("hover-selector", true)
+            .attr("hover-selector", i)
+            .attr("x", i * widthHoverSelector)
+            .attr("y", 0)
+            .attr("width", widthHoverSelector * (7 - i))
+            .attr("height", height)
+            .attr("fill", "black")
+            .attr("opacity", 0)
+            .on("mouseenter", function (event, d) {
+               console.log(event.target);
+               d3.select(circles.nodes()[i])
+                  .transition()
+                  .duration(100)
+                  .style("opacity", "1"); // <== CSS selector (DOM)
+               d3.select(this)
+                  .transition()
+                  .duration(100)
+                  .style("opacity", "0.2"); // <== CSS selector (DOM)
+
+               tooltip.attr(
+                  "transform",
+                  `translate(${i === scaleX.domain()[1] - 1 ? -30 : 0}, 30)`
+               );
+               tooltip
+                  .append("rect")
+                  .classed("tooltip-rect", true)
+                  .attr("x", i * widthHoverSelector + 10)
+                  .attr("y", d3.select(circles.nodes()[i]).attr("cy") - 15)
+                  .attr("width", 39)
+                  .attr("height", 25);
+
+               tooltip
+                  .append("text")
+                  .text(lineData[i][1] + " min")
+                  .classed("tooltip-text", true)
+                  .attr("x", i * widthHoverSelector + 18)
+                  .attr("y", d3.select(circles.nodes()[i]).attr("cy"));
+            })
+            .on("mouseleave ", function (event, d) {
+               console.log(event);
+               d3.select(circles.nodes()[i])
+                  .transition()
+                  .duration(100)
+                  .style("opacity", "0"); // <== CSS selector (DOM)
+               d3.select(this).transition().duration(100).style("opacity", "0"); // <== CSS selector (DOM)
+
+               //remove tooltip
+               tooltip.selectAll(".tooltip-rect, .tooltip-text").remove();
+            });
+      }
    }, [dataGraph]);
    return (
       <div className="home__stats--card red-card">
-         <svg className="graph-average-sessions">
-            {/* <p>
-               Durée moyenne des <br />
-               sessions
-            </p> */}
-
-            {/* <div className="hebdo">
-                  <div className="hebdo__day">L</div>
-                  <div className="hebdo__day">M</div>
-                  <div className="hebdo__day">M</div>
-                  <div className="hebdo__day">J</div>
-                  <div className="hebdo__day">V</div>
-                  <div className="hebdo__day">S</div>
-                  <div className="hebdo__day">D</div>
-               </div> */}
-         </svg>
+         <svg className="graph-average-sessions"></svg>
       </div>
    );
 }
