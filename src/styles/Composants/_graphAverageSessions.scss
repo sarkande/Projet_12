@@ -13,21 +13,16 @@
       stroke-width: 2px;
       stroke-linecap: round;
    }
-   text {
+   .tick text,
+   .title {
       fill: white;
       font-size: 15px;
-      z-index: 2;
-      &:hover {
-         opacity: 1;
-      }
    }
-   circle {
+
+   .graph-line-dot {
       opacity: 0;
    }
-   rect {
-      opacity: 1;
-      //z-index: 2;
-   }
+
    .hover-selector {
       opacity: 0;
       fill: black;

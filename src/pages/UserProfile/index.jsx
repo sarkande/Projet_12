@@ -22,6 +22,8 @@ function UserProfile() {
    const [performances, setPerformances] = useState(0);
    const [averageSessions, setAverageSessions] = useState(0);
 
+   const durationAnimation = 2000;
+
    useEffect(() => {
       const userData = new User(idUser);
       const activitiesData = new Activity(idUser);
@@ -61,7 +63,10 @@ function UserProfile() {
                <p>AverageSessions is loading</p>
             ) : (
                <div>
-                  <GraphAverageSessions data={averageSessions.sessions} />
+                  <GraphAverageSessions
+                     data={averageSessions.sessions}
+                     durationAnimation={durationAnimation}
+                  />
                </div>
             )}
             {!performances.isLoaded ? (
@@ -75,7 +80,10 @@ function UserProfile() {
                <p>User is loading</p>
             ) : (
                <div>
-                  <GraphUserScore data={user.todayScore} />
+                  <GraphUserScore
+                     data={user.todayScore}
+                     durationAnimation={durationAnimation}
+                  />
                </div>
             )}
          </div>

@@ -95,19 +95,13 @@ body {
   line-height: 24px;
 }
 
-.graph path {
-  stroke: white;
-  stroke-width: 2px;
-  fill: none;
+.score-text-percent {
+  font-size: 26px;
+  fill: black;
 }
-.graph circle {
-  opacity: 0;
-}
-.graph circle:hover {
-  opacity: 1;
-}
-.graph g {
-  transform: translateX(-21px);
+.score-text-subtitle {
+  font-size: 16px;
+  fill: #74798c;
 }
 
 .graph-average-sessions {
@@ -126,19 +120,13 @@ body {
   stroke-width: 2px;
   stroke-linecap: round;
 }
-.graph-average-sessions text {
+.graph-average-sessions .tick text,
+.graph-average-sessions .title {
   fill: white;
   font-size: 15px;
-  z-index: 2;
 }
-.graph-average-sessions text:hover {
-  opacity: 1;
-}
-.graph-average-sessions circle {
+.graph-average-sessions .graph-line-dot {
   opacity: 0;
-}
-.graph-average-sessions rect {
-  opacity: 1;
 }
 .graph-average-sessions .hover-selector {
   opacity: 0;

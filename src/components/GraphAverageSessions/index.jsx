@@ -3,17 +3,15 @@ import { useEffect } from "react";
 
 //https://observablehq.com/@d3/d3-line
 
-function GraphAverageSessions(data) {
+function GraphAverageSessions({ data, durationAnimation }) {
    //load data from props
-   console.log("GraphAverageSessions", data);
-   let dataGraph = data.data;
 
    useEffect(() => {
       //array of data to graph
       const lineData = [];
 
       //extract data
-      dataGraph.forEach((element, index) => {
+      data.forEach((element, index) => {
          lineData.push([element.day, element.sessionLength]);
       });
 
@@ -24,8 +22,6 @@ function GraphAverageSessions(data) {
       );
 
       //set the dimensions and margins of the graph
-      console.log("lineData", lineData);
-      console.log("lineDataAnimation", lineDataAnimation);
       const width = 258;
       const height = 263;
       const margin = { top: 50, right: 20, bottom: 50, left: 20 };
@@ -34,7 +30,6 @@ function GraphAverageSessions(data) {
       const innerWidth = width - margin.left - margin.right;
       const innerHeight = height - margin.top - margin.bottom;
 
-      const durationTransitionLine = 2000;
       //set the size of the svg
       const svg = d3
          .select(".graph-average-sessions")
@@ -61,7 +56,7 @@ function GraphAverageSessions(data) {
       g.append("path")
          .attr("d", line(lineDataAnimation))
          .transition()
-         .duration(durationTransitionLine)
+         .duration(durationAnimation)
          .attr("d", line(lineData));
 
       //set the x axis
@@ -115,11 +110,13 @@ function GraphAverageSessions(data) {
       const title = svg.append("g");
       title
          .append("text")
+         .classed("title", true)
          .text("Durée moyenne des")
          .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
       title
          .append("text")
+         .classed("title", true)
          .text("sessions")
          .attr("transform", `translate(${margin.left}, ${margin.top + 25})`);
 
@@ -129,13 +126,14 @@ function GraphAverageSessions(data) {
          .data(lineData)
          .enter()
          .append("circle")
+         .classed("graph-line-dot", true)
          .attr("cx", (d) => scaleX(d[0]))
          .attr("cy", (d) => scaleY(d[1]))
          .attr("r", 5)
          .attr("fill", "white")
          .transition()
-         .duration(durationTransitionLine)
-         .delay(durationTransitionLine);
+         .duration(durationAnimation)
+         .delay(durationAnimation);
 
       //set the groupe rect
       const widthHoverSelector =
@@ -153,7 +151,6 @@ function GraphAverageSessions(data) {
             .attr("height", height)
 
             .on("mouseenter", function (event, d) {
-               console.log(event.target);
                d3.select(circles.nodes()[i])
                   .transition()
                   .duration(100)
@@ -183,7 +180,6 @@ function GraphAverageSessions(data) {
                   .attr("y", d3.select(circles.nodes()[i]).attr("cy"));
             })
             .on("mouseleave ", function (event, d) {
-               console.log(event);
                d3.select(circles.nodes()[i])
                   .transition()
                   .duration(100)
@@ -195,7 +191,7 @@ function GraphAverageSessions(data) {
                tooltip.selectAll(".tooltip-rect, .tooltip-text").remove();
             });
       }
-   }, [dataGraph]);
+   }, [data]);
    return (
       <div className="home__stats--card red-card">
          <svg className="graph-average-sessions"></svg>
