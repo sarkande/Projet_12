@@ -1,12 +1,9 @@
 import * as d3 from "d3";
 import React, { useEffect } from "react";
 function GraphUserScore({ data, durationAnimation }) {
-   console.log(data);
    const todayScore = data * 100;
    const todayScoreDegree = (todayScore * 360) / 100;
-   console.log(todayScore);
    useEffect(() => {
-      console.log(durationAnimation);
       //set the dimensions and margins of the graph
       const width = 258;
       const height = 263;
