@@ -16,14 +16,11 @@ function GraphPerformance({ data }) {
          .attr("width", width)
          .attr("height", height);
 
-      // const points = d3.range(numberOfPoints).map((d) => {
-      //    const angle = (d / numberOfPoints) * Math.PI * 2;
-      //    return { x: Math.sin(angle), y: Math.cos(angle) };
-      // });
       const g = svg
          .append("g")
          .attr("transform", `translate(${width / 2},${height / 2})`);
 
+      //construct a radar chart
       const sizeOfRadar = Object.keys(data.kind).length;
       const radius = 100;
       const radiusInterval = 30;
@@ -41,13 +38,25 @@ function GraphPerformance({ data }) {
             ]);
          }
 
-         var pathData = d3.radialLine()(points);
+         var pathData = d3.lineRadial()(points);
 
          g.append("path")
             .attr("d", pathData)
             .attr("fill", "none")
             .attr("stroke", "white");
       }
+      //Transform the data into a format that can be used by the radar chart
+      var dataForRadar = [];
+      var maxValueData = 250;
+      console.log("maxValueData", maxValueData);
+      for (var key in data.data) {
+         console.log("key", data.data[key]);
+         dataForRadar.push({
+            axis: data.data[key].kind,
+            value: parseInt((data.data[key].value * radius) / maxValueData), //replace 1 by max value
+         });
+      }
+      console.log("dataForRadar", dataForRadar);
    }, [data]);
    return (
       <div className="home__stats--card black-card">
