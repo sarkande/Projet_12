@@ -49,8 +49,11 @@ function UserProfile() {
 
    return user.isLoaded && !user.error ? (
       <div className="App">
-         <h1>Hello {user.userInfos.firstName}</h1>
-
+         <h1>
+            Bonjour{" "}
+            <span className="title-name">{user.userInfos.firstName}</span>
+         </h1>
+         <p>Félicitation ! Vous avez explosé vos objectifs hier 👏</p>
          <div className="home__stats">
             {!activities.isLoaded ? (
                <p>Activity is loading</p>

@@ -7,7 +7,7 @@ function GraphActivity({ data, durationAnimation }) {
    useEffect(() => {
       const width = 840;
       const height = 320;
-      const margin = { top: 50, right: 70, bottom: 50, left: 50 };
+      const margin = { top: 70, right: 70, bottom: 50, left: 50 };
 
       const innerWidth = width - margin.left - margin.right;
       const innerHeight = height - margin.top - margin.bottom;
@@ -32,7 +32,11 @@ function GraphActivity({ data, durationAnimation }) {
       console.log(yScaleKg.domain());
       console.log(xScale.domain());
       const xAxis = d3.axisBottom(xScale).ticks(7).tickSizeOuter(0);
-      const yAxis = d3.axisRight(yScaleKg).ticks(3);
+      const yAxis = d3
+         .axisRight(yScaleKg)
+         .ticks(3)
+         .tickSizeInner(-innerWidth)
+         .tickSizeOuter(0);
 
       const groupDataCalories = svg
          .append("g")
@@ -40,6 +44,23 @@ function GraphActivity({ data, durationAnimation }) {
       const groupDataKg = svg
          .append("g")
          .attr("transform", `translate(${margin.left},${margin.top})`);
+
+      const xAxisSelector = groupDataKg
+         .append("g")
+         .attr("transform", `translate(10,${innerHeight})`);
+      xAxisSelector.call(xAxis);
+
+      xAxisSelector.selectAll(".tick line").remove();
+      xAxisSelector.selectAll(".tick text").classed("tick-text", true);
+
+      const yAxisSelector = groupDataCalories
+         .append("g")
+         .attr("transform", `translate(${innerWidth + 15},0)`);
+      yAxisSelector.call(yAxis);
+      yAxisSelector.selectAll(".tick text").classed("tick-text", true);
+      yAxisSelector.selectAll(".tick line").classed("tick-line", true);
+
+      yAxisSelector.selectAll(".domain").remove();
 
       groupDataKg
          .selectAll("rect")
@@ -67,26 +88,10 @@ function GraphActivity({ data, durationAnimation }) {
          .attr("rx", 2)
          .attr("ry", 2);
 
-      const xAxisSelector = groupDataKg
-         .append("g")
-         .attr("transform", `translate(10,${innerHeight})`);
-      xAxisSelector.call(xAxis);
-
-      xAxisSelector.selectAll(".tick line").remove();
-      xAxisSelector.selectAll(".tick text").classed("tick-text", true);
-
-      const yAxisSelector = groupDataKg
-         .append("g")
-         .attr("transform", `translate(${innerWidth + 30},0)`);
-      yAxisSelector.call(yAxis);
-      yAxisSelector.selectAll(".tick text").classed("tick-text", true);
-      yAxisSelector.selectAll(".tick line").remove();
-      yAxisSelector.selectAll(".domain").remove();
-
       const title = svg
          .append("g")
          .classed("title", true)
-         .attr("transform", `translate(${margin.left},${margin.top})`);
+         .attr("transform", `translate(${margin.left},${margin.top - 30})`);
       title.append("text").text("Activité quotidienne").attr("fill", "black");
    }, [data, durationAnimation]);
    return (

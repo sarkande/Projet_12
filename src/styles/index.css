@@ -166,6 +166,11 @@ body {
   text-align: right;
   fill: #9b9eac;
 }
+.graph-activity .tick-line {
+  transform: scaleX(1.028) translateX(-10px);
+  stroke-dasharray: 3px;
+  stroke: #9b9eac;
+}
 
 .home {
   position: relative;
@@ -224,4 +229,7 @@ body {
   margin-left: 109px;
   margin-right: 117px;
   font-family: "Roboto", sans-serif;
+}
+.App .title-name {
+  color: red;
 }/*# sourceMappingURL=index.css.map */

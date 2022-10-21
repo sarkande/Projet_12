@@ -13,4 +13,9 @@
       text-align: right;
       fill: #9b9eac;
    }
+   .tick-line {
+      transform: scaleX(1.028) translateX(-10px);
+      stroke-dasharray: 3px;
+      stroke: #9b9eac;
+   }
 }
