@@ -13,10 +13,10 @@ function GraphPerformance({ data }) {
       const maxValueData = 250;
 
       const sizeOfRadar = Object.keys(data.kind).length;
-      const radius = 90;
-      const radiusInterval = 27;
+      const radius = 80;
+      const radiusInterval = 23;
       const numberOfRadar = 5;
-      const textOffSet = 15;
+      const textOffSet = 16;
       // const innerWidth = width - margin.left - margin.right;
       // const innerHeight = height - margin.top - margin.bottom;
 
@@ -55,7 +55,7 @@ function GraphPerformance({ data }) {
       for (var key in data.data) {
          console.log("key", data.data[key]);
          dataForRadar.push({
-            axis: data.data[key].kind,
+            axis: data.kind[data.data[key].kind],
             value: parseInt((data.data[key].value * radius) / maxValueData), //replace 1 by max value
          });
       }
@@ -81,24 +81,24 @@ function GraphPerformance({ data }) {
          .attr("opacity", 0.5);
 
       console.log("size", sizeOfRadar);
-      for (var i = 0; i <= sizeOfRadar; i++) {
+      for (var i = 0; i < sizeOfRadar; i++) {
+         const angle = (i / sizeOfRadar) * -Math.PI * 2 + Math.PI;
          g.append("text")
             .attr("class", "axis-label")
             .attr(
                "x",
-               Math.sin((i / sizeOfRadar) * Math.PI * 2 + Math.PI) *
-                  (radius + 2 * textOffSet)
+               Math.sin(angle) *
+                  (radius +
+                     textOffSet +
+                     textOffSet / 2 +
+                     (data.kind[i + 1].length > 6 ? textOffSet / 2 : 0))
             )
-            .attr(
-               "y",
-               Math.cos((i / sizeOfRadar) * Math.PI * 2 + Math.PI) *
-                  (radius + textOffSet)
-            )
+            .attr("y", Math.cos(angle) * (radius + textOffSet))
             .attr("text-anchor", "middle")
             .attr("dominant-baseline", "central")
             .attr("fill", "white")
-            .attr("font-size", "12px")
-            .text(data.kind[i]);
+            .attr("font-size", "10px")
+            .text(data.kind[i + 1]);
       }
    }, [data]);
    return (
