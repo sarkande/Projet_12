@@ -52,7 +52,7 @@ function GraphUserScore({ data, durationAnimation }) {
       const title = svg
          .append("g")
          .classed("title", true)
-         .attr("transform", `translate(0,${margin.top})`);
+         .attr("transform", `translate(${margin.left},${margin.top})`);
       title.append("text").text("Score").attr("fill", "black");
 
       const score = svg
@@ -79,7 +79,7 @@ function GraphUserScore({ data, durationAnimation }) {
    }, [data, durationAnimation]);
 
    return (
-      <div className="home__stats--card">
+      <div className="home__stats--card gray-card">
          <svg className="graph-userScore"></svg>
       </div>
    );

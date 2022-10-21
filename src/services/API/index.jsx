@@ -6,10 +6,7 @@ import {
 } from "../../assets/mockedData";
 
 const axios = require("axios");
-console.log(
-   "process.env.REACT_APP_USE_MOCK_DATA",
-   typeof process.env.REACT_APP_USE_MOCK_DATA
-);
+
 const data_request_mock =
    process.env.REACT_APP_USE_MOCK_DATA === "true" ? true : false;
 const url_datas = "http://localhost:3000/user";
@@ -17,7 +14,6 @@ const url_datas = "http://localhost:3000/user";
 class API {
    static getUser(id) {
       if (data_request_mock) {
-         console.log("data_request_mock", data_request_mock);
          return new Promise((resolve, reject) => {
             const user = USER_MAIN_DATA.find((user) => user.id === id);
             if (user) {
@@ -27,7 +23,6 @@ class API {
             }
          });
       } else {
-         console.log("data_request_mock", data_request_mock);
          return axios
             .get(url_datas + "/" + id)
             .then((response) => response.data.data);

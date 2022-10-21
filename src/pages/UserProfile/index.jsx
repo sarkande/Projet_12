@@ -56,7 +56,10 @@ function UserProfile() {
                <p>Activity is loading</p>
             ) : (
                <div>
-                  <GraphActivity data={activities.sessions} />
+                  <GraphActivity
+                     data={activities.sessions}
+                     durationAnimation={durationAnimation}
+                  />
                </div>
             )}
             {!averageSessions.isLoaded ? (

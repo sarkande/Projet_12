@@ -1,4 +1,3 @@
-import * as d3 from "d3";
 import React from "react";
 
 import { Link } from "react-router-dom";
@@ -23,11 +22,9 @@ class Home extends React.Component {
 
    render() {
       const { user } = this.state;
-      console.log(user);
       return (
          <div className="App">
             {user.map((u, index) => {
-               console.log(u);
                return u.isLoaded ? (
                   <p key={index}>
                      <Link to={`/user/${u.id}`}>{u.userInfos.firstName}</Link>

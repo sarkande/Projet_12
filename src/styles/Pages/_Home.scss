@@ -37,7 +37,7 @@
          &.large {
             height: 320px;
             width: 840px;
-            background-color: gray;
+            border: #282d30 solid 1px;
          }
          &.red-card {
             background-color: red;
@@ -46,6 +46,9 @@
          &.black-card {
             background-color: #282d30;
             color: white;
+         }
+         &.gray-card {
+            background-color: #fbfbfb;
          }
       }
    }

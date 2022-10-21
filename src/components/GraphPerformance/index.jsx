@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import * as d3 from "d3";
 
 function GraphPerformance({ data, durationAnimation }) {
-   console.log("GraphPerformance", data);
    useEffect(() => {
       const width = 258;
       const height = 263;
@@ -52,13 +51,11 @@ function GraphPerformance({ data, durationAnimation }) {
       var dataForRadar = [];
 
       for (var key in data.data) {
-         console.log("key", data.data[key]);
          dataForRadar.push({
             axis: data.kind[data.data[key].kind],
             value: parseInt((data.data[key].value * radius) / maxValueData), //replace 1 by max value
          });
       }
-      console.log("dataForRadar", dataForRadar);
 
       //Draw the radar chart
       const pointsAnimationData = d3.range(sizeOfRadar).map((i) => {
@@ -89,7 +86,6 @@ function GraphPerformance({ data, durationAnimation }) {
          .duration(durationAnimation)
          .attr("d", pathAreaEnd);
 
-      console.log("size", sizeOfRadar);
       for (var i = 0; i < sizeOfRadar; i++) {
          const angle = (i / sizeOfRadar) * -Math.PI * 2 + Math.PI;
          g.append("text")

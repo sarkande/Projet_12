@@ -7,8 +7,7 @@ import "./styles/index.css";
 import Home from "./pages/Home";
 import NavBarMenu from "./components/NavBarMenu";
 import NavBarFooter from "./components/NavBarFooter";
-import Test from "./pages/Test/Test";
-import Test2 from "./pages/Test/Test2";
+
 import UserProfile from "./pages/UserProfile";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -20,8 +19,6 @@ root.render(
       <Routes>
          <Route path="/" element={<Home />} />
          <Route path="/user/:id" element={<UserProfile />} />
-         <Route path="/test" element={<Test />} />
-         <Route path="/test2" element={<Test2 />} />
       </Routes>
    </Router>
    //</React.StrictMode>
