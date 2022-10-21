@@ -80,26 +80,6 @@ function GraphPerformance({ data }) {
          .attr("fill", "red")
          .attr("opacity", 0.5);
 
-      //draw the axis labels
-      // const axisLabels = g
-      //    .selectAll(".axis-label")
-      //    .data(data.kind)
-      //    .enter()
-      //    .append("text")
-      //    .attr("class", "axis-label")
-      //    .attr(
-      //       "x",
-      //       (d) =>
-      //          Math.sin((d.axis / sizeOfRadar) * Math.PI * 2) * (radius + 10)
-      //    )
-      //    .attr(
-      //       "y",
-      //       (d) =>
-      //          Math.cos((d.axis / sizeOfRadar) * Math.PI * 2) * (radius + 10)
-      //    )
-      //    .attr("text-anchor", "middle")
-      //    .attr("dominant-baseline", "central")
-      //    .text((d) => d.axis);
       console.log("size", sizeOfRadar);
       for (var i = 0; i <= sizeOfRadar; i++) {
          g.append("text")
