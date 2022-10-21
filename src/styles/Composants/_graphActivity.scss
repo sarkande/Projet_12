@@ -1,4 +1,9 @@
 .graph-activity {
+   .domain {
+      stroke-width: 1px;
+      stroke: #9b9eac;
+      transform: scaleX(1.028) translateX(-10px);
+   }
    .tick-text {
       font-family: "Leto", sans-serif;
       font-size: 14px;

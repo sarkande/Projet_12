@@ -152,6 +152,11 @@ body {
   opacity: 0.5;
 }
 
+.graph-activity .domain {
+  stroke-width: 1px;
+  stroke: #9b9eac;
+  transform: scaleX(1.028) translateX(-10px);
+}
 .graph-activity .tick-text {
   font-family: "Leto", sans-serif;
   font-size: 14px;
@@ -198,7 +203,6 @@ body {
 .home__stats--card.large {
   height: 320px;
   width: 840px;
-  border: #282d30 solid 1px;
 }
 .home__stats--card.red-card {
   background-color: red;

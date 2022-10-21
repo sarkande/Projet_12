@@ -17,43 +17,65 @@ function GraphActivity({ data, durationAnimation }) {
       console.log(data.length);
       const xScale = d3.scaleLinear().domain([1, 7]).range([0, innerWidth]);
 
-      const yScale = d3
+      const yScaleKg = d3
          .scaleLinear()
          .domain([
             d3.min(data, (d) => d.kilogram - 1),
             d3.max(data, (d) => d.kilogram + 1),
          ])
          .range([innerHeight, 0]);
+      const yScaleCalories = d3
+         .scaleLinear()
+         .domain([0, 600])
+         .range([innerHeight, 0]);
 
-      console.log(yScale.domain());
+      console.log(yScaleKg.domain());
       console.log(xScale.domain());
       const xAxis = d3.axisBottom(xScale).ticks(7).tickSizeOuter(0);
-      const yAxis = d3.axisRight(yScale).ticks(3);
+      const yAxis = d3.axisRight(yScaleKg).ticks(3);
 
-      const g = svg
+      const groupDataCalories = svg
          .append("g")
-         .attr("transform", `translate(${margin.left},${margin.top})`)
-         .attr("border", "1px solid black");
+         .attr("transform", `translate(${margin.left + 13},${margin.top})`);
+      const groupDataKg = svg
+         .append("g")
+         .attr("transform", `translate(${margin.left},${margin.top})`);
 
-      g.selectAll("rect")
+      groupDataKg
+         .selectAll("rect")
          .data(data)
          .enter()
          .append("rect")
          .attr("x", (d, i) => xScale(i + 1))
-         .attr("y", (d) => yScale(d.kilogram))
+         .attr("y", (d) => yScaleKg(d.kilogram))
          .attr("width", 7)
-         .attr("height", (d) => innerHeight - yScale(d.kilogram))
+         .attr("height", (d) => innerHeight - yScaleKg(d.kilogram))
          .attr("fill", "#282D30")
          .attr("rx", 2)
          .attr("ry", 2);
 
-      const xAxisSelector = g
+      groupDataCalories
+         .selectAll("rect")
+         .data(data)
+         .enter()
+         .append("rect")
+         .attr("x", (d, i) => xScale(i + 1))
+         .attr("y", (d) => yScaleCalories(d.calories))
+         .attr("width", 7)
+         .attr("height", (d) => innerHeight - yScaleCalories(d.calories))
+         .attr("fill", "red")
+         .attr("rx", 2)
+         .attr("ry", 2);
+
+      const xAxisSelector = groupDataKg
          .append("g")
-         .attr("transform", `translate(0,${innerHeight})`);
+         .attr("transform", `translate(10,${innerHeight})`);
       xAxisSelector.call(xAxis);
+
       xAxisSelector.selectAll(".tick line").remove();
       xAxisSelector.selectAll(".tick text").classed("tick-text", true);
-      const yAxisSelector = g
+
+      const yAxisSelector = groupDataKg
          .append("g")
          .attr("transform", `translate(${innerWidth + 30},0)`);
       yAxisSelector.call(yAxis);
