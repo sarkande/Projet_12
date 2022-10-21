@@ -147,6 +147,11 @@ body {
   font-weight: 700;
 }
 
+.graph-performance .area {
+  fill: red;
+  opacity: 0.5;
+}
+
 .home {
   position: relative;
   padding: 10px;

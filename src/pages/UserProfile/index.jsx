@@ -73,7 +73,10 @@ function UserProfile() {
                <p>Performance is loading</p>
             ) : (
                <div>
-                  <GraphPerformance data={performances} />
+                  <GraphPerformance
+                     data={performances}
+                     durationAnimation={durationAnimation}
+                  />
                </div>
             )}
             {!user.isLoaded ? (

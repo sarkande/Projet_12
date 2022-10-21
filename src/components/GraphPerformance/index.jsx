@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import * as d3 from "d3";
 
-function GraphPerformance({ data }) {
+function GraphPerformance({ data, durationAnimation }) {
    console.log("GraphPerformance", data);
    useEffect(() => {
       const width = 258;
@@ -13,8 +13,8 @@ function GraphPerformance({ data }) {
       const maxValueData = 250;
 
       const sizeOfRadar = Object.keys(data.kind).length;
-      const radius = 80;
-      const radiusInterval = 23;
+      const radius = 90;
+      const radiusInterval = 27;
       const numberOfRadar = 5;
       const textOffSet = 16;
       // const innerWidth = width - margin.left - margin.right;
@@ -62,6 +62,12 @@ function GraphPerformance({ data }) {
       console.log("dataForRadar", dataForRadar);
 
       //Draw the radar chart
+      const pointsAnimationData = d3.range(sizeOfRadar).map((i) => {
+         const angle = (i / sizeOfRadar) * -Math.PI * 2 + Math.PI;
+         return [Math.sin(angle) * 1 + centerX, Math.cos(angle) * 1 + centerY];
+      });
+
+      //Draw the radar chart
       const pointsData = d3.range(sizeOfRadar).map((i) => {
          const angle = (i / sizeOfRadar) * -Math.PI * 2 + Math.PI;
          return [
@@ -70,29 +76,26 @@ function GraphPerformance({ data }) {
          ];
       });
 
-      console.log("points", pointsData);
       //draw the shapes
       pointsData.push(pointsData[0]);
-      var pathArea = d3.area()(pointsData);
+      pointsAnimationData.push(pointsAnimationData[0]);
+
+      var pathAreaBegin = d3.area()(pointsAnimationData);
+      var pathAreaEnd = d3.area()(pointsData);
       //add the shape to the svg
       svg.append("path")
-         .attr("d", pathArea)
-         .attr("fill", "red")
-         .attr("opacity", 0.5);
+         .classed("area", true)
+         .attr("d", pathAreaBegin)
+         .transition()
+         .duration(durationAnimation)
+         .attr("d", pathAreaEnd);
 
       console.log("size", sizeOfRadar);
       for (var i = 0; i < sizeOfRadar; i++) {
          const angle = (i / sizeOfRadar) * -Math.PI * 2 + Math.PI;
          g.append("text")
             .attr("class", "axis-label")
-            .attr(
-               "x",
-               Math.sin(angle) *
-                  (radius +
-                     textOffSet +
-                     textOffSet / 2 +
-                     (data.kind[i + 1].length > 6 ? textOffSet / 2 : 0))
-            )
+            .attr("x", Math.sin(angle) * (radius + textOffSet + textOffSet / 2))
             .attr("y", Math.cos(angle) * (radius + textOffSet))
             .attr("text-anchor", "middle")
             .attr("dominant-baseline", "central")
