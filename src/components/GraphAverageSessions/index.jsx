@@ -191,7 +191,7 @@ function GraphAverageSessions({ data, durationAnimation }) {
                tooltip.selectAll(".tooltip-rect, .tooltip-text").remove();
             });
       }
-   }, [data]);
+   }, [data, durationAnimation]);
    return (
       <div className="home__stats--card red-card">
          <svg className="graph-average-sessions"></svg>
@@ -206,13 +206,13 @@ function interpolateArray(data, fitCount) {
       return before + (after - before) * atPoint;
    };
 
-   var newData = new Array();
-   var springFactor = new Number((data.length - 1) / (fitCount - 1));
+   var newData = [];
+   var springFactor = Number((data.length - 1) / (fitCount - 1));
    newData[0] = data[0]; // for new allocation
    for (var i = 1; i < fitCount - 1; i++) {
       var tmp = i * springFactor;
-      var before = new Number(Math.floor(tmp)).toFixed();
-      var after = new Number(Math.ceil(tmp)).toFixed();
+      var before = Number(Math.floor(tmp)).toFixed();
+      var after = Number(Math.ceil(tmp)).toFixed();
       var atPoint = tmp - before;
       newData[i] = [
          i + 1,

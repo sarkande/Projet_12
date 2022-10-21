@@ -6,7 +6,6 @@ function GraphPerformance({ data, durationAnimation }) {
    useEffect(() => {
       const width = 258;
       const height = 263;
-      const margin = { top: 50, right: 20, bottom: 50, left: 20 };
 
       const centerX = width / 2;
       const centerY = height / 2;
@@ -103,7 +102,7 @@ function GraphPerformance({ data, durationAnimation }) {
             .attr("font-size", "10px")
             .text(data.kind[i + 1]);
       }
-   }, [data]);
+   }, [data, durationAnimation]);
    return (
       <div className="home__stats--card black-card">
          <svg className="graph-performance"></svg>

@@ -1,16 +1,15 @@
 import * as d3 from "d3";
 import React, { useEffect } from "react";
 function GraphUserScore({ data, durationAnimation }) {
-   const todayScore = data * 100;
-   const todayScoreDegree = (todayScore * 360) / 100;
    useEffect(() => {
+      const todayScore = data * 100;
+      const todayScoreDegree = (todayScore * 360) / 100;
       //set the dimensions and margins of the graph
       const width = 258;
       const height = 263;
       const margin = { top: 50, right: 20, bottom: 50, left: 20 };
 
       const innerWidth = width - margin.left - margin.right;
-      const innerHeight = height - margin.top - margin.bottom;
 
       const radius = 80;
       const radiusStroke = 10;
@@ -77,7 +76,7 @@ function GraphUserScore({ data, durationAnimation }) {
          .text("objectif")
          .attr("transform", `translate(-1, 40)`)
          .classed("score-text-subtitle", true);
-   }, [todayScore]);
+   }, [data, durationAnimation]);
 
    return (
       <div className="home__stats--card">
