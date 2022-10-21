@@ -14,7 +14,7 @@ function GraphActivity({ data, durationAnimation }) {
 
       const svg = d3.select(".graph-activity");
       svg.attr("width", width).attr("height", height);
-      console.log(data.length);
+
       const xScale = d3.scaleLinear().domain([1, 7]).range([0, innerWidth]);
 
       const yScaleKg = d3
@@ -29,8 +29,6 @@ function GraphActivity({ data, durationAnimation }) {
          .domain([0, 600])
          .range([innerHeight, 0]);
 
-      console.log(yScaleKg.domain());
-      console.log(xScale.domain());
       const xAxis = d3.axisBottom(xScale).ticks(7).tickSizeOuter(0);
       const yAxis = d3
          .axisRight(yScaleKg)
@@ -44,14 +42,6 @@ function GraphActivity({ data, durationAnimation }) {
       const groupDataKg = svg
          .append("g")
          .attr("transform", `translate(${margin.left},${margin.top})`);
-
-      const xAxisSelector = groupDataKg
-         .append("g")
-         .attr("transform", `translate(10,${innerHeight})`);
-      xAxisSelector.call(xAxis);
-
-      xAxisSelector.selectAll(".tick line").remove();
-      xAxisSelector.selectAll(".tick text").classed("tick-text", true);
 
       const yAxisSelector = groupDataCalories
          .append("g")
@@ -74,6 +64,14 @@ function GraphActivity({ data, durationAnimation }) {
          .attr("fill", "#282D30")
          .attr("rx", 2)
          .attr("ry", 2);
+
+      const xAxisSelector = groupDataKg
+         .append("g")
+         .attr("transform", `translate(10,${innerHeight})`);
+      xAxisSelector.call(xAxis);
+
+      xAxisSelector.selectAll(".tick line").remove();
+      xAxisSelector.selectAll(".tick text").classed("tick-text", true);
 
       groupDataCalories
          .selectAll("rect")
