@@ -8,6 +8,15 @@ function GraphPerformance({ data }) {
       const height = 263;
       const margin = { top: 50, right: 20, bottom: 50, left: 20 };
 
+      const centerX = width / 2;
+      const centerY = height / 2;
+      const maxValueData = 250;
+
+      const sizeOfRadar = Object.keys(data.kind).length;
+      const radius = 90;
+      const radiusInterval = 27;
+      const numberOfRadar = 5;
+      const textOffSet = 15;
       // const innerWidth = width - margin.left - margin.right;
       // const innerHeight = height - margin.top - margin.bottom;
 
@@ -18,27 +27,22 @@ function GraphPerformance({ data }) {
 
       const g = svg
          .append("g")
-         .attr("transform", `translate(${width / 2},${height / 2})`);
+         .attr("transform", `translate(${centerX},${centerY})`);
 
       //construct a radar chart
-      const sizeOfRadar = Object.keys(data.kind).length;
-      const radius = 100;
-      const radiusInterval = 30;
-      const numberOfRadar = 5;
 
-      var points = [];
+      var pointsRadar = [];
 
       for (let i = 0; i < numberOfRadar; i++) {
-         console.log("i", i);
-         points = [];
+         pointsRadar = [];
          for (var j = 0; j <= sizeOfRadar; j++) {
-            points.push([
+            pointsRadar.push([
                ((j * 360) / sizeOfRadar) * (Math.PI / 180),
                radius - i * radiusInterval,
             ]);
          }
 
-         var pathData = d3.lineRadial()(points);
+         var pathData = d3.lineRadial()(pointsRadar);
 
          g.append("path")
             .attr("d", pathData)
@@ -47,8 +51,7 @@ function GraphPerformance({ data }) {
       }
       //Transform the data into a format that can be used by the radar chart
       var dataForRadar = [];
-      var maxValueData = 250;
-      console.log("maxValueData", maxValueData);
+
       for (var key in data.data) {
          console.log("key", data.data[key]);
          dataForRadar.push({
@@ -57,6 +60,66 @@ function GraphPerformance({ data }) {
          });
       }
       console.log("dataForRadar", dataForRadar);
+
+      //Draw the radar chart
+      const pointsData = d3.range(sizeOfRadar).map((i) => {
+         const angle = (i / sizeOfRadar) * -Math.PI * 2 + Math.PI;
+         return [
+            Math.sin(angle) * dataForRadar[i].value + centerX,
+            Math.cos(angle) * dataForRadar[i].value + centerY,
+         ];
+      });
+
+      console.log("points", pointsData);
+      //draw the shapes
+      pointsData.push(pointsData[0]);
+      var pathArea = d3.area()(pointsData);
+      //add the shape to the svg
+      svg.append("path")
+         .attr("d", pathArea)
+         .attr("fill", "red")
+         .attr("opacity", 0.5);
+
+      //draw the axis labels
+      // const axisLabels = g
+      //    .selectAll(".axis-label")
+      //    .data(data.kind)
+      //    .enter()
+      //    .append("text")
+      //    .attr("class", "axis-label")
+      //    .attr(
+      //       "x",
+      //       (d) =>
+      //          Math.sin((d.axis / sizeOfRadar) * Math.PI * 2) * (radius + 10)
+      //    )
+      //    .attr(
+      //       "y",
+      //       (d) =>
+      //          Math.cos((d.axis / sizeOfRadar) * Math.PI * 2) * (radius + 10)
+      //    )
+      //    .attr("text-anchor", "middle")
+      //    .attr("dominant-baseline", "central")
+      //    .text((d) => d.axis);
+      console.log("size", sizeOfRadar);
+      for (var i = 0; i <= sizeOfRadar; i++) {
+         g.append("text")
+            .attr("class", "axis-label")
+            .attr(
+               "x",
+               Math.sin((i / sizeOfRadar) * Math.PI * 2 + Math.PI) *
+                  (radius + 2 * textOffSet)
+            )
+            .attr(
+               "y",
+               Math.cos((i / sizeOfRadar) * Math.PI * 2 + Math.PI) *
+                  (radius + textOffSet)
+            )
+            .attr("text-anchor", "middle")
+            .attr("dominant-baseline", "central")
+            .attr("fill", "white")
+            .attr("font-size", "12px")
+            .text(data.kind[i]);
+      }
    }, [data]);
    return (
       <div className="home__stats--card black-card">
