@@ -12,6 +12,7 @@ import GraphAverageSessions from "../../components/GraphAverageSessions";
 import GraphPerformance from "../../components/GraphPerformance";
 import GraphActivity from "../../components/GraphActivity";
 import GraphUserScore from "../../components/GraphUserScore";
+import UserKeyData from "../../components/UserKeyData";
 
 function UserProfile() {
    const currentPath = useLocation().pathname.split("/");
@@ -49,12 +50,13 @@ function UserProfile() {
 
    return user.isLoaded && !user.error ? (
       <div className="App">
-         <h1>
-            Bonjour{" "}
-            <span className="title-name">{user.userInfos.firstName}</span>
-         </h1>
-         <p>Félicitation ! Vous avez explosé vos objectifs hier 👏</p>
          <div className="home__stats">
+            <h1>
+               Bonjour{" "}
+               <span className="title-name">{user.userInfos.firstName}</span>
+            </h1>
+            <p>Félicitation ! Vous avez explosé vos objectifs hier 👏</p>
+
             {!activities.isLoaded ? (
                <p>Activity is loading</p>
             ) : (
@@ -94,6 +96,13 @@ function UserProfile() {
                      durationAnimation={durationAnimation}
                   />
                </div>
+            )}
+         </div>
+         <div className="home__key-data">
+            {!user.isLoaded ? (
+               <p>User is loading</p>
+            ) : (
+               <UserKeyData data={user.keyData} />
             )}
          </div>
       </div>

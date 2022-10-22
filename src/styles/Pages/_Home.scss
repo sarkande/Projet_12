@@ -27,6 +27,11 @@
       flex-wrap: wrap;
       align-items: center;
       width: 872px;
+      h1,
+      p {
+         width: 100%;
+      }
+
       &--card {
          height: 263px;
          width: 258px;

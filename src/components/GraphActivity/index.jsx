@@ -65,7 +65,7 @@ function GraphActivity({ data, durationAnimation }) {
          .attr("rx", 2)
          .attr("ry", 2)
          .transition()
-         .delay((d, i) => (i * durationAnimation) / 10)
+         .delay((d, i) => (i * durationAnimation) / 20)
          .duration(durationAnimation)
          .attr("y", (d) => yScaleKg(d.kilogram))
          .attr("height", (d) => innerHeight - yScaleKg(d.kilogram));
@@ -91,7 +91,7 @@ function GraphActivity({ data, durationAnimation }) {
          .attr("rx", 2)
          .attr("ry", 2)
          .transition()
-         .delay((d, i) => (i * durationAnimation) / 10)
+         .delay((d, i) => (i * durationAnimation) / 20)
          .duration(durationAnimation)
          .attr("y", (d) => yScaleCalories(d.calories))
          .attr("height", (d) => innerHeight - yScaleCalories(d.calories));

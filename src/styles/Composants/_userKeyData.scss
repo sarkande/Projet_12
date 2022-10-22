@@ -1,0 +1,69 @@
+.user-key-data {
+   width: 258px;
+   margin-left: 50px;
+   margin-top: 160px;
+   &__item {
+      background: #fbfbfb;
+      box-shadow: 0px 2px 4px rgb(0 0 0 / 2%);
+      border-radius: 5px;
+      height: 124px;
+      display: flex;
+
+      align-content: center;
+      align-items: center;
+      justify-content: flex-start;
+      padding-left: 32px;
+      margin-bottom: 39px;
+      &--icon {
+         width: 60px;
+         height: 60px;
+         img {
+            margin-left: auto;
+            margin-right: auto;
+            display: block;
+            vertical-align: middle;
+            width: 100%;
+            height: 100%;
+         }
+      }
+      &--title {
+         padding-left: 24px;
+         &-data {
+            font-family: "Leto", sans-serif;
+            font-style: normal;
+            font-weight: 700;
+            font-size: 20px;
+            line-height: 24px;
+            /* identical to box height, or 120% */
+
+            color: #282d30;
+         }
+         &-subtitle {
+            font-family: "Leto", sans-serif;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 24px;
+            /* identical to box height, or 171% */
+
+            color: #74798c;
+         }
+      }
+   }
+}
+
+/*
+
+<div className="user-key-data--item"">
+            <img
+               className="user-key-data--item"__icon"
+               src={icon_2}
+               alt="icon"
+            />
+            <div className="user-key-data--item"__title">
+               {data.proteinCount}g
+            </div>
+            <div className="user-key-data--item"__value">Proteines</div>
+         </div>
+
+*/
