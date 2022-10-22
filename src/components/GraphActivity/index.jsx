@@ -7,7 +7,7 @@ function GraphActivity({ data, durationAnimation }) {
    useEffect(() => {
       const width = 840;
       const height = 320;
-      const margin = { top: 70, right: 70, bottom: 50, left: 50 };
+      const margin = { top: 80, right: 70, bottom: 50, left: 50 };
 
       const innerWidth = width - margin.left - margin.right;
       const innerHeight = height - margin.top - margin.bottom;
@@ -89,8 +89,47 @@ function GraphActivity({ data, durationAnimation }) {
       const title = svg
          .append("g")
          .classed("title", true)
-         .attr("transform", `translate(${margin.left},${margin.top - 30})`);
+         .attr("transform", `translate(${margin.left},${margin.top - 50})`);
       title.append("text").text("Activité quotidienne").attr("fill", "black");
+
+      const legend = svg
+         .append("g")
+         .classed("legend", true)
+         .attr(
+            "transform",
+            `translate(${innerWidth - margin.right - 100},${margin.top - 50})`
+         );
+      legend
+         .append("circle")
+         .attr("x", 0)
+         .attr("y", 0)
+         .attr("r", 4)
+
+         .attr("fill", "#282D30");
+
+      legend
+         .append("text")
+         .text("Poids (kg)")
+         .attr("fill", "black")
+         .attr("x", 10)
+         .attr("y", 5)
+         .attr("font-size", 14);
+
+      legend
+         .append("circle")
+         .attr("x", 0)
+         .attr("y", 0)
+         .attr("r", 4)
+         .attr("fill", "red")
+         .attr("transform", `translate(96,0)`);
+      legend
+         .append("text")
+         .text("Calories brûlées (kCal)")
+         .attr("fill", "black")
+         .attr("x", 10)
+         .attr("y", 5)
+         .attr("font-size", 14)
+         .attr("transform", `translate(96,0)`);
    }, [data, durationAnimation]);
    return (
       <div className="home__stats--card gray-card large">
