@@ -152,12 +152,23 @@ body {
   opacity: 0.5;
 }
 
+.graph-activity .title {
+  fill: black;
+  font-family: "Leto", sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: 0px;
+  text-align: left;
+}
 .graph-activity .domain {
   stroke-width: 2px;
   stroke: #9b9eac;
   transform: scaleX(1.028) translateX(-10px);
 }
-.graph-activity .tick-text {
+.graph-activity .tick-text,
+.graph-activity .legend-text-kg,
+.graph-activity .legend-text-calorie {
   font-family: "Leto", sans-serif;
   font-size: 14px;
   font-weight: 500;
@@ -170,6 +181,33 @@ body {
   transform: scaleX(1.028) translateX(-10px);
   stroke-dasharray: 3px;
   stroke: #9b9eac;
+}
+.graph-activity .bar-kg,
+.graph-activity .legend-circle-kg {
+  fill: "#282D30";
+}
+.graph-activity .bar-calorie,
+.graph-activity .legend-circle-calorie {
+  fill: red;
+}
+.graph-activity .legend-text-kg,
+.graph-activity .legend-text-calorie {
+  fill: #74798c;
+}
+.graph-activity .hover-selector {
+  opacity: 0;
+  fill: black;
+}
+.graph-activity .tooltip-rect {
+  fill: red;
+}
+.graph-activity .tooltip-text {
+  fill: white;
+  font-family: "Leto", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 7px;
+  line-height: 24px;
 }
 
 .home {

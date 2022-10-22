@@ -61,7 +61,8 @@ function GraphActivity({ data, durationAnimation }) {
          .attr("y", (d) => yScaleKg(d.kilogram))
          .attr("width", 7)
          .attr("height", (d) => innerHeight - yScaleKg(d.kilogram))
-         .attr("fill", "#282D30")
+         .classed("bar-kg", true)
+
          .attr("rx", 2)
          .attr("ry", 2);
 
@@ -82,7 +83,7 @@ function GraphActivity({ data, durationAnimation }) {
          .attr("y", (d) => yScaleCalories(d.calories))
          .attr("width", 7)
          .attr("height", (d) => innerHeight - yScaleCalories(d.calories))
-         .attr("fill", "red")
+         .classed("bar-calorie", true)
          .attr("rx", 2)
          .attr("ry", 2);
 
@@ -90,7 +91,7 @@ function GraphActivity({ data, durationAnimation }) {
          .append("g")
          .classed("title", true)
          .attr("transform", `translate(${margin.left},${margin.top - 50})`);
-      title.append("text").text("Activité quotidienne").attr("fill", "black");
+      title.append("text").text("Activité quotidienne");
 
       const legend = svg
          .append("g")
@@ -104,32 +105,87 @@ function GraphActivity({ data, durationAnimation }) {
          .attr("x", 0)
          .attr("y", 0)
          .attr("r", 4)
-
-         .attr("fill", "#282D30");
+         .classed("legend-circle-kg", true);
 
       legend
          .append("text")
          .text("Poids (kg)")
-         .attr("fill", "black")
          .attr("x", 10)
          .attr("y", 5)
-         .attr("font-size", 14);
+         .classed("legend-text-kg", true);
 
       legend
          .append("circle")
          .attr("x", 0)
          .attr("y", 0)
          .attr("r", 4)
-         .attr("fill", "red")
-         .attr("transform", `translate(96,0)`);
+         .attr("transform", `translate(96,0)`)
+         .classed("legend-circle-calorie", true);
       legend
          .append("text")
          .text("Calories brûlées (kCal)")
-         .attr("fill", "black")
          .attr("x", 10)
          .attr("y", 5)
-         .attr("font-size", 14)
+         .classed("legend-text-calorie", true)
          .attr("transform", `translate(96,0)`);
+
+      //set the groupe rect
+      const widthHoverSelector =
+         parseInt(xScale.range()[1] / xScale.domain()[1]) + 22;
+      const groupHoverSelector = svg.append("g");
+      const tooltip = groupHoverSelector.append("g");
+      for (let i = 0; i < xScale.domain()[1]; i++) {
+         groupHoverSelector
+            .append("rect")
+            .classed("hover-selector", true)
+            .attr("hover-selector", i)
+            .attr("x", i * widthHoverSelector)
+            .attr("y", 0 + margin.top)
+            .attr("width", widthHoverSelector)
+            .attr("height", innerHeight)
+
+            .on("mouseenter", function (event, d) {
+               d3.select(this)
+                  .transition()
+                  .duration(100)
+                  .style("opacity", "0.2"); // <== CSS selector (DOM)
+
+               tooltip.attr(
+                  "transform",
+                  `translate(${
+                     i === xScale.domain()[1] - 1
+                        ? -70 - +widthHoverSelector
+                        : 0
+                  }, 30)`
+               );
+               tooltip
+                  .append("rect")
+                  .classed("tooltip-rect", true)
+                  .attr("x", i * widthHoverSelector + widthHoverSelector + 10)
+                  .attr("y", margin.top / 3 - 10)
+                  .attr("width", 40)
+                  .attr("height", 55);
+
+               tooltip
+                  .append("text")
+                  .text(`${data[i].kilogram} kg`)
+                  .classed("tooltip-text", true)
+                  .attr("x", i * widthHoverSelector + widthHoverSelector + 20)
+                  .attr("y", margin.top / 3 + 10);
+               tooltip
+                  .append("text")
+                  .text(`${data[i].calories} kCal`)
+                  .classed("tooltip-text", true)
+                  .attr("x", i * widthHoverSelector + widthHoverSelector + 15)
+                  .attr("y", margin.top / 3 + 30);
+            })
+            .on("mouseleave ", function (event, d) {
+               d3.select(this).transition().duration(100).style("opacity", "0"); // <== CSS selector (DOM)
+
+               //remove tooltip
+               tooltip.selectAll(".tooltip-rect, .tooltip-text").remove();
+            });
+      }
    }, [data, durationAnimation]);
    return (
       <div className="home__stats--card gray-card large">
