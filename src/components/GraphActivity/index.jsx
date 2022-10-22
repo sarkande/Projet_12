@@ -58,13 +58,17 @@ function GraphActivity({ data, durationAnimation }) {
          .enter()
          .append("rect")
          .attr("x", (d, i) => xScale(i + 1))
-         .attr("y", (d) => yScaleKg(d.kilogram))
+         .attr("y", innerHeight)
          .attr("width", 7)
-         .attr("height", (d) => innerHeight - yScaleKg(d.kilogram))
+         .attr("height", 0)
          .classed("bar-kg", true)
-
          .attr("rx", 2)
-         .attr("ry", 2);
+         .attr("ry", 2)
+         .transition()
+         .delay((d, i) => (i * durationAnimation) / 10)
+         .duration(durationAnimation)
+         .attr("y", (d) => yScaleKg(d.kilogram))
+         .attr("height", (d) => innerHeight - yScaleKg(d.kilogram));
 
       const xAxisSelector = groupDataKg
          .append("g")
@@ -80,12 +84,17 @@ function GraphActivity({ data, durationAnimation }) {
          .enter()
          .append("rect")
          .attr("x", (d, i) => xScale(i + 1))
-         .attr("y", (d) => yScaleCalories(d.calories))
+         .attr("y", innerHeight)
          .attr("width", 7)
-         .attr("height", (d) => innerHeight - yScaleCalories(d.calories))
+         .attr("height", 0)
          .classed("bar-calorie", true)
          .attr("rx", 2)
-         .attr("ry", 2);
+         .attr("ry", 2)
+         .transition()
+         .delay((d, i) => (i * durationAnimation) / 10)
+         .duration(durationAnimation)
+         .attr("y", (d) => yScaleCalories(d.calories))
+         .attr("height", (d) => innerHeight - yScaleCalories(d.calories));
 
       const title = svg
          .append("g")
