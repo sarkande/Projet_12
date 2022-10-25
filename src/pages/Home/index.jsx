@@ -5,6 +5,7 @@ import User from "../../models/User";
 
 //Get All user, actually only 2 with no endpoints
 //12 18
+/** React class to display links to our 2 users profiles */
 class Home extends React.Component {
    constructor(props) {
       super(props);
@@ -24,15 +25,19 @@ class Home extends React.Component {
       const { user } = this.state;
       return (
          <div className="App">
-            {user.map((u, index) => {
-               return u.isLoaded ? (
-                  <p key={index}>
-                     <Link to={`/user/${u.id}`}>{u.userInfos.firstName}</Link>
-                  </p>
-               ) : (
-                  <p key={index}>Loading...</p>
-               );
-            })}
+            <ul>
+               {user.map((u, index) => {
+                  return u.isLoaded ? (
+                     <li key={index}>
+                        <Link to={`/user/${u.id}`}>
+                           {u.userInfos.firstName}
+                        </Link>
+                     </li>
+                  ) : (
+                     <li key={index}>Loading...</li>
+                  );
+               })}
+            </ul>
          </div>
       );
    }

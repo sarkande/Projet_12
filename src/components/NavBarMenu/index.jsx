@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom";
 import logo from "../../assets/icons/logo.png";
 
+/**
+ * Sort of header of the application that is displayed on the top
+ * @returns {any}
+ */
 function NavBarMenu() {
    return (
       <div className="NavBarMenu">

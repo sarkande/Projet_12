@@ -1,8 +1,15 @@
 import { useEffect } from "react";
 import * as d3 from "d3";
-
+/**
+ * Component to render the performance graph
+ * @param {Object} data - Object with data to be displayed in the graph about performance ({index:value}})
+ * @param {int} durationAnimation - Duration of the animation in milliseconds
+ * @returns {JSX.Element} - Graph with the performance data
+ */
 function GraphPerformance({ data, durationAnimation }) {
    useEffect(() => {
+      // Constants to define the size of the graph
+      // and some params
       const width = 258;
       const height = 263;
 
@@ -15,8 +22,6 @@ function GraphPerformance({ data, durationAnimation }) {
       const radiusInterval = 27;
       const numberOfRadar = 5;
       const textOffSet = 16;
-      // const innerWidth = width - margin.left - margin.right;
-      // const innerHeight = height - margin.top - margin.bottom;
 
       const svg = d3
          .select(".graph-performance")

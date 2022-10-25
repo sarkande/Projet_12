@@ -1,14 +1,14 @@
-import { useEffect } from "react";
 import icon_1 from "../../assets/user_icons/icon_1.png";
 import icon_2 from "../../assets/user_icons/icon_2.png";
 import icon_3 from "../../assets/user_icons/icon_3.png";
 import icon_4 from "../../assets/user_icons/icon_4.png";
 
+/**
+ * Differents icons that show the user's counts of sessions
+ * @param {Object} {data} - Data of the user (calories, lipid, protein, carbohydrate)
+ * @returns {JSX.Element} - Component with the icons
+ */
 function UserKeyData({ data }) {
-   useEffect(() => {
-      console.log("UserKeyData", data);
-   }, [data]);
-
    return (
       <div className="user-key-data">
          <div className="user-key-data__item">

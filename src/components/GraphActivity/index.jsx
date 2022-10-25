@@ -1,10 +1,17 @@
 import * as d3 from "d3";
 import { useEffect } from "react";
 
+/**
+ * Component to render the activity graph
+ * @param {Object} data - Object with data to be displayed in the graph about activity (kg/calories/day)
+ * @param {int} durationAnimation - Duration of the animation in milliseconds
+ * @returns {JSX.Element} - Graph with the activity data
+ */
 function GraphActivity({ data, durationAnimation }) {
-   console.log("GraphActivity", data);
-
    useEffect(() => {
+      // Constants to define the size of the graph
+      // and some params
+
       const width = 840;
       const height = 320;
       const margin = { top: 80, right: 70, bottom: 50, left: 50 };
@@ -15,6 +22,7 @@ function GraphActivity({ data, durationAnimation }) {
       const svg = d3.select(".graph-activity");
       svg.attr("width", width).attr("height", height);
 
+      // X and Y scales for calories and kg
       const xScale = d3.scaleLinear().domain([1, 7]).range([0, innerWidth]);
 
       const yScaleKg = d3
@@ -29,6 +37,7 @@ function GraphActivity({ data, durationAnimation }) {
          .domain([0, 600])
          .range([innerHeight, 0]);
 
+      //axis
       const xAxis = d3.axisBottom(xScale).ticks(7).tickSizeOuter(0);
       const yAxis = d3
          .axisRight(yScaleKg)
@@ -36,6 +45,7 @@ function GraphActivity({ data, durationAnimation }) {
          .tickSizeInner(-innerWidth)
          .tickSizeOuter(0);
 
+      //some group to contains the graphs
       const groupDataCalories = svg
          .append("g")
          .attr("transform", `translate(${margin.left + 13},${margin.top})`);
@@ -43,15 +53,18 @@ function GraphActivity({ data, durationAnimation }) {
          .append("g")
          .attr("transform", `translate(${margin.left},${margin.top})`);
 
+      //Add Y axis and remove useless tthings
       const yAxisSelector = groupDataCalories
          .append("g")
          .attr("transform", `translate(${innerWidth + 15},0)`);
+
       yAxisSelector.call(yAxis);
       yAxisSelector.selectAll(".tick text").classed("tick-text", true);
       yAxisSelector.selectAll(".tick line").classed("tick-line", true);
 
       yAxisSelector.selectAll(".domain").remove();
 
+      //Draw kg
       groupDataKg
          .selectAll("rect")
          .data(data)
@@ -70,6 +83,7 @@ function GraphActivity({ data, durationAnimation }) {
          .attr("y", (d) => yScaleKg(d.kilogram))
          .attr("height", (d) => innerHeight - yScaleKg(d.kilogram));
 
+      //Add X axis and remove useless tthings
       const xAxisSelector = groupDataKg
          .append("g")
          .attr("transform", `translate(10,${innerHeight})`);
@@ -78,6 +92,7 @@ function GraphActivity({ data, durationAnimation }) {
       xAxisSelector.selectAll(".tick line").remove();
       xAxisSelector.selectAll(".tick text").classed("tick-text", true);
 
+      //draw calories
       groupDataCalories
          .selectAll("rect")
          .data(data)
@@ -96,12 +111,14 @@ function GraphActivity({ data, durationAnimation }) {
          .attr("y", (d) => yScaleCalories(d.calories))
          .attr("height", (d) => innerHeight - yScaleCalories(d.calories));
 
+      //Add title
       const title = svg
          .append("g")
          .classed("title", true)
          .attr("transform", `translate(${margin.left},${margin.top - 50})`);
       title.append("text").text("Activité quotidienne");
 
+      //Add legend labels
       const legend = svg
          .append("g")
          .classed("legend", true)
@@ -196,6 +213,7 @@ function GraphActivity({ data, durationAnimation }) {
             });
       }
    }, [data, durationAnimation]);
+
    return (
       <div className="home__stats--card gray-card large">
          <svg className="graph-activity"></svg>

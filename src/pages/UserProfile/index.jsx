@@ -14,6 +14,10 @@ import GraphActivity from "../../components/GraphActivity";
 import GraphUserScore from "../../components/GraphUserScore";
 import UserKeyData from "../../components/UserKeyData";
 
+/**
+ * Page to display the user's profile
+ * @returns {JSX.Element} - Page with the user's profile
+ */
 function UserProfile() {
    const currentPath = useLocation().pathname.split("/");
    const idUser = Number(currentPath[currentPath.length - 1]);

@@ -1,5 +1,11 @@
 import * as d3 from "d3";
 import React, { useEffect } from "react";
+/**
+ * Component to render the user score graph
+ * @param {Object} data - data to be displayed in percentage ( 0.01 - 1 )
+ * @param {int} durationAnimation - Duration of the animation in milliseconds
+ * @returns {JSX.Element} - Graph with the performance data
+ */
 function GraphUserScore({ data, durationAnimation }) {
    useEffect(() => {
       const todayScore = data * 100;

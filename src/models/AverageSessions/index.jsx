@@ -1,6 +1,10 @@
 import API from "../../services/API";
 
+/** Average Sessions class */
 class AverageSessions {
+   /** constructor
+    * @param {Number} id - Id of the user
+    **/
    constructor(id) {
       this.userId = id;
       this.sessions = null;
@@ -8,6 +12,9 @@ class AverageSessions {
 
       this.error = false;
    }
+   /** load data from the api
+    * @returns {Promise} - Promise of the API call
+    */
    async load() {
       return await API.getUserAverageSessions(this.userId)
          .then((user) => {

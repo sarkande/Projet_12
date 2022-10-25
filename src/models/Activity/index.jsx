@@ -1,6 +1,10 @@
 import API from "../../services/API";
 
+/** Activity class */
 class Activity {
+   /** constructor
+    * @param {Number} id - Id of the user
+    **/
    constructor(id) {
       this.userId = id;
       this.sessions = null;
@@ -8,7 +12,9 @@ class Activity {
 
       this.error = false;
    }
-
+   /** load data from the api
+    * @returns {Promise} - Promise of the API call
+    */
    async load() {
       return await API.getUserActivity(this.userId)
          .then((user) => {

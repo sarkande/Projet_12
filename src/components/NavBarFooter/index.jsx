@@ -3,6 +3,10 @@ import icon_2 from "../../assets/icons/icon_2.png";
 import icon_3 from "../../assets/icons/icon_3.png";
 import icon_4 from "../../assets/icons/icon_4.png";
 
+/**
+ * Footer of the application thqt is displqy on the left
+ * @returns {any}
+ */
 function NavBarFooter() {
    return (
       <div className="NavBarFooter">

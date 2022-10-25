@@ -3,6 +3,12 @@ import { useEffect } from "react";
 
 //https://observablehq.com/@d3/d3-line
 
+/**
+ * Component to render the Average Sessions  graph
+ * @param {Object} data - Object with data to be displayed in the graph about average sessiosn ({index:value}})
+ * @param {int} durationAnimation - Duration of the animation in milliseconds
+ * @returns {JSX.Element} - Graph with the averageSessions data
+ */
 function GraphAverageSessions({ data, durationAnimation }) {
    //load data from props
 
